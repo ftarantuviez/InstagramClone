@@ -1,21 +1,20 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css'
 import Post from './Post'
+import {db} from './firebase'
 
 function App(){
 
-    const [posts, setPosts] = useState([
-        {
-            imageUrl: "https://image.tmdb.org/t/p/w500/qcr9bBY6MVeLzriKCmJOv1562uY.jpg",
-            username: "Franciscot",
-            caption:"This is caption but idk what it is"
-        },
-        {
-            imageUrl: "https://image.tmdb.org/t/p/w500/qcr9bBY6MVeLzriKCmJOv1562uY.jpg",
-            username: "NewUser",
-            caption:"This is caption but idk what it is"
-        }
-    ])
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        db.collection('/posts').onSnapshot(snapshot => {
+            setPosts(snapshot.docs.map(doc => ({
+                id: doc.id, 
+                data: doc.data()
+            })))
+        })
+    }, [])
 
     return(
         <div className="App">
@@ -29,10 +28,10 @@ function App(){
 
             {posts.map(post => (
                 <Post 
-                    key={Math.random() * 1000}
-                    username={post.username} 
-                    caption={post.caption}
-                    imageUrl={post.imageUrl}
+                    key={post.id}
+                    username={post.data.username} 
+                    caption={post.data.caption}
+                    imageUrl={post.data.imageUrl}
                 />
             ))}
 
