@@ -33,6 +33,7 @@ function App(){
 
     const [posts, setPosts] = useState([])
     const [open, setOpen] = useState(false)
+    const [openSignIn, setOpenSignIn] = useState(false)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -121,9 +122,14 @@ function App(){
                 />
             </div>
             {user
-            ? <Button onClick={() => auth.signOut()}>Logout</Button>
-            :<Button onClick={() => setOpen(true)}>Sign Up</Button>
-        }
+                ? <Button onClick={() => auth.signOut()}>Logout</Button>
+                :(
+                    <div className="app__loginContainer">
+                        <Button onClick={() => setOpen(true)}>Sign Up</Button>)
+                        <Button onClick={() => setOpen(true)}>Sign In</Button>)
+                    </div>
+                
+            }
 
             {posts.map(post => (
                 <Post 
