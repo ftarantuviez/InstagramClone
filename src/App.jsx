@@ -120,8 +120,10 @@ function App(){
                     className="app__headerImage"
                 />
             </div>
-
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            {user
+            ? <Button onClick={() => auth.signOut()}>Logout</Button>
+            :<Button onClick={() => setOpen(true)}>Sign Up</Button>
+        }
 
             {posts.map(post => (
                 <Post 
