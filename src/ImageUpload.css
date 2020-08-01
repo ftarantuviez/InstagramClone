@@ -1,0 +1,33 @@
+.imageupload{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 10px auto;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    background: #e6dddd9c;
+    margin: 0;
+    width: 100%;
+    align-items: center;
+    border-radius: 20px;
+    bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.imageupload__progress{
+    width: 80%;
+    margin: 5px;
+}
+
+.imageupload input{
+    width: 60%;
+    margin: 5px;
+}
+
+@media screen and (min-width: 768px){
+    .imageupload{
+        width: 60%;
+    }
+}
